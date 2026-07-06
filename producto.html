@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartera Sofía — cuero eco | BRAVAS</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .pdp{ padding-top:var(--sp-5); padding-bottom:var(--sp-9); }
+  .breadcrumb{ font-size:12px; color:var(--gray-dark); margin-bottom:var(--sp-4); }
+  .breadcrumb a{ color:var(--gray-dark); }
+
+  /* Galería vertical con zoom */
+  .pdp-grid{ display:flex; flex-direction:column; gap:var(--sp-6); }
+  .pdp-gallery{ display:flex; flex-direction:column-reverse; gap:10px; }
+  .pdp-thumbs{ display:flex; gap:8px; overflow-x:auto; }
+  .pdp-thumb{ width:58px; height:70px; border-radius:var(--radius-sm); overflow:hidden; position:relative; border:1.5px solid transparent; flex-shrink:0; background:none; padding:0; }
+  .pdp-thumb img{ width:100%; height:100%; object-fit:cover; }
+  .pdp-thumb.active{ border-color:var(--black); }
+  .pdp-zoom{ position:relative; aspect-ratio:4/5; border-radius:var(--radius-md); overflow:hidden; cursor:zoom-in; background:var(--gray); }
+  .pdp-zoom img{ width:100%; height:100%; object-fit:cover; transition:transform .35s var(--ease); transform-origin:center; }
+  .pdp-zoom:hover img{ transform:scale(1.5); }
+  .pdp-zoom-hint{ position:absolute; bottom:10px; right:10px; background:rgba(255,255,255,0.85); font-size:10.5px; padding:5px 10px; border-radius:var(--radius-pill); display:flex; align-items:center; gap:5px; pointer-events:none; }
+  .pdp-zoom-hint svg{ width:12px; height:12px; }
+
+  .pdp-info h1{ font-size:24px; margin-bottom:4px; }
+  .pdp-rating{ display:flex; align-items:center; gap:8px; font-size:12px; color:var(--gray-dark); margin-bottom:var(--sp-3); }
+  .pdp-rating .stars{ color:var(--suela); letter-spacing:1px; }
+  .pdp-price-block{ display:flex; align-items:baseline; gap:10px; margin-bottom:2px; }
+  .pdp-price{ font-size:26px; font-weight:700; }
+  .pdp-installments{ font-size:12.5px; color:var(--success); font-weight:500; margin-bottom:var(--sp-5); }
+
+  .option-group{ margin-bottom:var(--sp-5); }
+  .option-label{ font-size:13px; font-weight:600; margin-bottom:10px; display:flex; justify-content:space-between; }
+  .color-options{ display:flex; gap:10px; }
+  .color-swatch{ width:34px; height:34px; border-radius:50%; border:2px solid transparent; cursor:pointer; position:relative; }
+  .color-swatch.active{ border-color:var(--black); }
+  .color-swatch.active::after{ content:''; position:absolute; inset:3px; border-radius:50%; border:1.5px solid var(--white); }
+
+  /* Selector de cuotas */
+  .installments-select{ width:100%; padding:12px 14px; border:1px solid var(--gray); border-radius:var(--radius-sm); font-family:inherit; font-size:13px; background:var(--white); color:var(--black); }
+  .installments-detail{ font-size:11.5px; color:var(--gray-dark); margin-top:6px; }
+
+  /* Envío estimado */
+  .shipping-check{ display:flex; gap:8px; margin-top:8px; }
+  .shipping-check input{ flex:1; padding:11px 14px; border:1px solid var(--gray); border-radius:var(--radius-sm); font-family:inherit; font-size:13px; }
+  .shipping-check button{ padding:11px 16px; border:1px solid var(--black); background:var(--white); border-radius:var(--radius-sm); font-size:12.5px; font-weight:600; }
+  .shipping-result{ font-size:12px; color:var(--success); margin-top:8px; display:none; align-items:center; gap:6px; }
+  .shipping-result.is-visible{ display:flex; }
+  .shipping-result svg{ width:14px; height:14px; }
+
+  .stock-note{ font-size:12px; color:var(--success); display:flex; align-items:center; gap:6px; margin-bottom:var(--sp-4); }
+  .stock-note svg{ width:14px; height:14px; }
+  .sticky-cta{ display:flex; flex-direction:column; gap:var(--sp-3); }
+
+  .guarantee-row{ display:flex; gap:var(--sp-4); padding:var(--sp-5) 0; }
+  .guarantee-item{ flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; gap:8px; }
+  .guarantee-item svg{ width:22px; height:22px; stroke-width:1.2; color:var(--black); }
+  .guarantee-item span{ font-size:11px; color:var(--gray-dark); }
+
+  .accordion{ border-top:1px solid var(--gray); margin-top:var(--sp-2); }
+  .accordion-item{ border-bottom:1px solid var(--gray); }
+  .accordion-item summary{ padding:var(--sp-4) 0; font-size:13.5px; font-weight:600; display:flex; justify-content:space-between; align-items:center; cursor:pointer; list-style:none; }
+  .accordion-item summary::-webkit-details-marker{ display:none; }
+  .accordion-item summary::after{ content:'+'; font-size:18px; font-weight:400; }
+  .accordion-item[open] summary::after{ content:'–'; }
+  .accordion-item p{ padding-bottom:var(--sp-4); font-size:13px; color:#333; line-height:1.7; }
+
+  .mobile-sticky-bar{
+    position:fixed; left:0; right:0; bottom:var(--tabbar-h); z-index:45;
+    background:var(--white); border-top:1px solid var(--gray); padding:var(--sp-3) var(--sp-4);
+    box-shadow:0 -8px 24px rgba(17,17,17,0.08); display:flex; align-items:center; gap:var(--sp-3);
+  }
+  .mobile-sticky-bar .info{ flex:1; }
+  .mobile-sticky-bar .price{ font-weight:700; font-size:15px; }
+  .mobile-sticky-bar .inst{ font-size:11px; color:var(--gray-dark); }
+
+  @media (min-width:1024px){
+    .mobile-sticky-bar{ display:none; }
+    .pdp-grid{ flex-direction:row; gap:var(--sp-9); align-items:flex-start; }
+    .pdp-gallery{ flex:1.1; flex-direction:row; position:sticky; top:calc(var(--header-h) + 32px); }
+    .pdp-thumbs{ flex-direction:column; overflow-x:visible; overflow-y:auto; max-height:560px; }
+    .pdp-thumb{ width:64px; height:78px; }
+    .pdp-zoom{ flex:1; aspect-ratio:4/5; }
+    .pdp-info{ flex:1; max-width:420px; }
+    .pdp{ padding-top:var(--sp-7); }
+    .guarantee-row{ padding-left:0; padding-right:0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-track">
+    <span>🚚 Envíos a todo el país</span>
+    <span>💳 Hasta 6 cuotas sin interés</span>
+    <span>🔄 Primer cambio gratis</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-row">
+    <div class="header-side">
+      <button class="icon-btn hide-desktop" id="openMenu" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="nav-desktop hide-mobile">
+        <div class="nav-item">
+          <a href="index.html#mood">Mood</a>
+          <div class="mega-menu">
+            <a href="index.html#mood">✨ Oficina</a><a href="index.html#mood">🏙 Ciudad</a><a href="index.html#mood">🌙 Noche</a><a href="index.html#mood">🏋 Movimiento</a><a href="index.html#mood">✈ Viajes</a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="index.html#mas-vendidas">Productos</a></div>
+        <div class="nav-item"><a href="index.html#novedades">Novedades</a></div>
+        <div class="nav-item"><a href="index.html">Promociones</a></div>
+        <div class="nav-item"><a href="index.html">Nosotras</a></div>
+      </nav>
+    </div>
+    <a href="index.html" class="logo">BRAVAS</a>
+    <div class="header-side right">
+      <button class="icon-btn hide-mobile" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+      <button class="icon-btn hide-mobile" aria-label="Favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.4-9.5-8.8C.7 8.4 2.6 5 6 5c2 0 3.3 1 4 2 1.7-2 5-2.7 6.5.2C19 9 18.8 12.5 15.5 15 13 17.5 12 21 12 21Z"/></svg></button>
+      <button class="icon-btn hide-mobile" aria-label="Mi cuenta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg></button>
+      <button class="icon-btn" data-open-cart aria-label="Ver carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge" data-cart-count style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer-overlay" id="menuOverlay"></div>
+<nav class="menu-drawer" id="menuDrawer" aria-label="Menú principal">
+  <div class="drawer-head">
+    <span class="logo" style="font-size:18px;">BRAVAS</span>
+    <button class="icon-btn" id="closeMenu" aria-label="Cerrar menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <ul class="menu-list">
+    <li>
+      <button class="menu-list-toggle" data-target="submenu-mood">Mood<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6 9 6 6 6-6"/></svg></button>
+      <ul class="submenu" id="submenu-mood">
+        <li><a href="index.html#mood">✨ Oficina</a></li><li><a href="index.html#mood">🏙 Ciudad</a></li><li><a href="index.html#mood">🌙 Noche</a></li><li><a href="index.html#mood">🏋 Movimiento</a></li><li><a href="index.html#mood">✈ Viajes</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#mas-vendidas">Productos <span>›</span></a></li>
+    <li><a href="index.html#novedades">Novedades <span>›</span></a></li>
+    <li><a href="index.html" style="color:var(--suela);">Promociones <span>›</span></a></li>
+    <li><a href="index.html">Nosotras <span>›</span></a></li>
+  </ul>
+</nav>
+
+<main class="pdp">
+  <div class="container">
+    <p class="breadcrumb"><a href="index.html">Inicio</a> / <a href="index.html#mas-vendidas">Carteras</a> / Cartera Sofía</p>
+
+    <div class="pdp-grid">
+
+      <!-- GALERÍA VERTICAL CON ZOOM -->
+      <div class="pdp-gallery">
+        <div class="pdp-thumbs">
+          <button class="pdp-thumb active" aria-label="Ver foto 1"><div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div></button>
+          <button class="pdp-thumb" aria-label="Ver foto 2"><div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div></button>
+          <button class="pdp-thumb" aria-label="Ver foto 3"><div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div></button>
+          <button class="pdp-thumb" aria-label="Ver foto 4"><div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div></button>
+        </div>
+        <div class="pdp-zoom" id="pdpZoom">
+          <div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div>
+          <span class="ref-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="m21 15-5-5-9 9"/></svg>Foto real del producto acá</span>
+          <span class="pdp-zoom-hint hide-mobile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Pasá el mouse para hacer zoom</span>
+        </div>
+      </div>
+
+      <!-- INFO / COMPRA -->
+      <div class="pdp-info">
+        <span class="eyebrow">Cuero eco · Colección camaleón</span>
+        <h1>Cartera Sofía</h1>
+        <div class="pdp-rating"><span class="stars">★★★★★</span><span>4.9 · 128 opiniones</span></div>
+
+        <div class="pdp-price-block"><span class="pdp-price">$54.900</span></div>
+        <span class="pdp-installments">6 cuotas sin interés de $9.150</span>
+
+        <div class="option-group">
+          <div class="option-label"><span>Color: Suela</span></div>
+          <div class="color-options">
+            <button class="color-swatch active" style="background:#B87A4B" aria-label="Suela"></button>
+            <button class="color-swatch" style="background:#111111" aria-label="Negro"></button>
+            <button class="color-swatch" style="background:#F5F1EC; border:1px solid #ddd;" aria-label="Beige"></button>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-label"><span>Medio de pago</span></div>
+          <select class="installments-select" id="installmentsSelect">
+            <option value="1">Pago único — $54.900</option>
+            <option value="3">3 cuotas sin interés de $18.300</option>
+            <option value="6" selected>6 cuotas sin interés de $9.150</option>
+            <option value="12">12 cuotas de $5.902 (con interés)</option>
+          </select>
+          <div class="installments-detail" id="installmentsDetail">Total: $54.900</div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-label"><span>¿Cuándo llega?</span></div>
+          <div class="shipping-check">
+            <input type="text" id="cpInput" placeholder="Ingresá tu código postal" inputmode="numeric">
+            <button type="button" id="cpCheckBtn">Calcular</button>
+          </div>
+          <div class="shipping-result" id="shippingResult">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/></svg>
+            <span id="shippingText">Llega en 2 a 4 días hábiles</span>
+          </div>
+        </div>
+
+        <div class="stock-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>En stock — envío en 24/48hs</div>
+
+        <div class="sticky-cta hide-mobile">
+          <button class="btn btn-primary btn-block" data-add-to-cart data-id="cartera-sofia" data-name="Cartera Sofía" data-price="54900" data-variant="Suela" data-icon="cartera" data-tint="tint-suela">Agregar al carrito</button>
+          <button class="btn btn-outline btn-block">Comprar ahora</button>
+        </div>
+
+        <div class="trust-badges">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 5-3.4 8-7 9-3.6-1-7-4-7-9V6l7-3Z"/></svg> Compra segura</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/></svg> Envíos a todo el país</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 3-6.7"/></svg> Primer cambio gratis</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="6" width="20" height="14" rx="2"/></svg> Hasta 6 cuotas</span>
+        </div>
+
+        <div class="guarantee-row">
+          <div class="guarantee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l7 3v6c0 5-3.4 8-7 9-3.6-1-7-4-7-9V6l7-3Z"/></svg><span>Garantía de calidad 90 días</span></div>
+          <div class="guarantee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span>Cambios sin costo, 30 días</span></div>
+          <div class="guarantee-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/></svg><span>Seguimiento en tiempo real</span></div>
+        </div>
+
+        <div class="accordion">
+          <details class="accordion-item" open>
+            <summary>Descripción</summary>
+            <p>Cartera de cuero eco con estructura semirrígida, ideal para el día a día. Su diseño minimalista se adapta tanto a la oficina como a una salida nocturna — la pieza camaleón que cambia con vos.</p>
+          </details>
+          <details class="accordion-item">
+            <summary>Medidas y materiales</summary>
+            <p>28cm x 20cm x 10cm. Cuero eco premium, herrajes dorados, forro interno antimanchas. Correa desmontable de 110cm.</p>
+          </details>
+          <details class="accordion-item">
+            <summary>Envíos y cambios</summary>
+            <p>Envío a todo el país en 24/48hs en CABA y GBA, 3 a 5 días hábiles en el resto del país. Primer cambio de talle o color sin costo dentro de los 30 días.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <!-- CROSS-SELL -->
+    <section class="section" style="padding-bottom:0;">
+      <div class="section-head"><span class="eyebrow">Completá tu look</span><h2>Combina bien con</h2></div>
+      <div class="product-grid">
+        <article class="product-card">
+          <a href="producto.html" class="product-media">
+            <div class="bag-illo tint-beige"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12 L46 46"/><path d="M80 12 L54 46"/><rect x="30" y="46" width="40" height="34" rx="6"/><path d="M30 58 h40"/></svg></div>
+            
+            <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="bandolera-nina" data-name="Bandolera Nina" data-price="38500" data-variant="Negro" data-icon="bandolera" data-tint="tint-beige">Agregar</button></div>
+          </a>
+          <div class="product-info"><span class="product-name">Bandolera Nina cross-body</span><div class="product-price-row"><span class="product-price">$38.500</span></div></div>
+        </article>
+        <article class="product-card">
+          <a href="producto.html" class="product-media">
+            <div class="bag-illo tint-mist"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M36 32 Q36 16 50 16 Q64 16 64 32"/><rect x="26" y="32" width="48" height="52" rx="9"/><rect x="36" y="52" width="28" height="20" rx="4"/><path d="M31 32 v12"/><path d="M69 32 v12"/></svg></div>
+            
+            <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="mochila-uma" data-name="Mochila Uma" data-price="61900" data-variant="Beige" data-icon="mochila" data-tint="tint-mist">Agregar</button></div>
+          </a>
+          <div class="product-info"><span class="product-name">Mochila Uma urbana</span><div class="product-price-row"><span class="product-price">$61.900</span></div></div>
+        </article>
+        <article class="product-card">
+          <a href="producto.html" class="product-media">
+            <div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M34 38 Q34 18 50 18 Q66 18 66 38"/><path d="M26 38 L20 82 h60 L74 38 Z"/></svg></div>
+            
+            <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="bolso-clara" data-name="Bolso Clara" data-price="47500" data-variant="Suela" data-icon="tote" data-tint="tint-suela">Agregar</button></div>
+          </a>
+          <div class="product-info"><span class="product-name">Bolso Clara tote</span><div class="product-price-row"><span class="product-price">$47.500</span></div></div>
+        </article>
+        <article class="product-card">
+          <a href="producto.html" class="product-media">
+            <div class="bag-illo tint-black"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div>
+            
+            <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="cartera-vera" data-name="Cartera Vera" data-price="52900" data-variant="Negro" data-icon="cartera" data-tint="tint-black">Agregar</button></div>
+          </a>
+          <div class="product-info"><span class="product-name">Cartera Vera mini</span><div class="product-price-row"><span class="product-price">$52.900</span></div></div>
+        </article>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-bottom" style="padding-top:var(--sp-6); padding-bottom:var(--sp-6);">
+    <span class="footer-copy">© 2026 BRAVAS — Hecho en Argentina 🇦🇷</span>
+  </div>
+</footer>
+
+<a class="whatsapp-fab" href="https://wa.me/5490000000000" target="_blank" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.7 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.3c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.6.7 1.9.8 2 .1.2.1.4 0 .6-.1.2-.2.3-.3.5-.2.2-.3.3-.5.5-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.7-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.7.8.2.1.4.2.4.3.1.2.1.7-.1 1.2Z"/></svg>
+</a>
+
+<div class="mobile-sticky-bar">
+  <div class="info"><div class="price" id="stickyPrice">$54.900</div><div class="inst" id="stickyInst">6 cuotas de $9.150</div></div>
+  <button class="btn btn-primary" data-add-to-cart data-id="cartera-sofia" data-name="Cartera Sofía" data-price="54900" data-variant="Suela" data-icon="cartera" data-tint="tint-suela">Agregar</button>
+</div>
+
+<aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+  <div class="cart-head"><h3>Tu carrito</h3><button class="icon-btn" id="closeCart" aria-label="Cerrar carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-trust-mini">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 5-3.4 8-7 9-3.6-1-7-4-7-9V6l7-3Z"/></svg> Compra segura</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/></svg> Envíos a todo el país</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 3-6.7"/></svg> Primer cambio gratis</span>
+    </div>
+    <div class="cart-subtotal-row"><span>Subtotal</span><span id="cartSubtotal">$0</span></div>
+    <a href="#" class="btn btn-primary btn-block">Finalizar compra</a>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<nav class="tab-bar" aria-label="Navegación principal móvil">
+  <a href="index.html" class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/></svg>Inicio</a>
+  <button class="tab-item hide-desktop" data-tab-action="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Buscar</button>
+  <a href="#" class="tab-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.4-9.5-8.8C.7 8.4 2.6 5 6 5c2 0 3.3 1 4 2 1.7-2 5-2.7 6.5.2C19 9 18.8 12.5 15.5 15 13 17.5 12 21 12 21Z"/></svg>Favoritos</a>
+  <button class="tab-item" data-tab-action="cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Carrito<span class="cart-badge" data-cart-count style="display:none">0</span></button>
+  <a href="#" class="tab-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>Cuenta</a>
+</nav>
+
+<script src="script.js"></script>
+<script>
+  // Color
+  document.querySelectorAll('.color-swatch').forEach(sw => {
+    sw.addEventListener('click', () => { document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active')); sw.classList.add('active'); });
+  });
+
+  // Galería: click en miniatura marca cuál está activa
+  // (con fotos reales, acá se debe reemplazar el contenido de #pdpZoom por la <img> correspondiente)
+  document.querySelectorAll('.pdp-thumb').forEach(th => {
+    th.addEventListener('click', () => {
+      document.querySelectorAll('.pdp-thumb').forEach(t => t.classList.remove('active'));
+      th.classList.add('active');
+    });
+  });
+
+  // Selector de cuotas
+  const BASE_PRICE = 54900;
+  const installmentsSelect = document.getElementById('installmentsSelect');
+  const installmentsDetail = document.getElementById('installmentsDetail');
+  const stickyPrice = document.getElementById('stickyPrice');
+  const stickyInst = document.getElementById('stickyInst');
+  function fmt(n){ return '$' + Math.round(n).toLocaleString('es-AR'); }
+  function updateInstallments(){
+    const n = Number(installmentsSelect.value);
+    if(n === 1){ installmentsDetail.textContent = `Total: ${fmt(BASE_PRICE)}`; stickyInst.textContent = 'Pago único'; }
+    else if(n === 12){ const total = BASE_PRICE * 1.29; installmentsDetail.textContent = `Total: ${fmt(total)} (CFT incluido)`; stickyInst.textContent = `12 cuotas de ${fmt(total/12)}`; }
+    else { installmentsDetail.textContent = `Total: ${fmt(BASE_PRICE)} — sin interés`; stickyInst.textContent = `${n} cuotas de ${fmt(BASE_PRICE/n)}`; }
+  }
+  installmentsSelect?.addEventListener('change', updateInstallments);
+  updateInstallments();
+
+  // Envío estimado (simulación)
+  document.getElementById('cpCheckBtn')?.addEventListener('click', () => {
+    const cp = document.getElementById('cpInput').value.trim();
+    const resultEl = document.getElementById('shippingResult');
+    const textEl = document.getElementById('shippingText');
+    if(!cp){ return; }
+    const isCaba = /^1[0-4]\d{2}$/.test(cp);
+    textEl.textContent = isCaba ? 'Llega en 24 a 48hs a tu domicilio' : 'Llega en 3 a 5 días hábiles a tu domicilio';
+    resultEl.classList.add('is-visible');
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRAVAS — Carteras y accesorios para cada versión de vos</title>
+<meta name="description" content="Carteras, bolsos y accesorios curados para la mujer que cambia de piel según el momento. Envíos a todo el país, hasta 6 cuotas sin interés, primer cambio gratis.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-track">
+    <span>🚚 Envíos a todo el país</span>
+    <span>💳 Hasta 6 cuotas sin interés</span>
+    <span>🔄 Primer cambio gratis</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-row">
+    <div class="header-side">
+      <button class="icon-btn hide-desktop" id="openMenu" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <nav class="nav-desktop hide-mobile">
+        <div class="nav-item">
+          <a href="#mood">Mood</a>
+          <div class="mega-menu">
+            <a href="#mood">✨ Oficina</a>
+            <a href="#mood">🏙 Ciudad</a>
+            <a href="#mood">🌙 Noche</a>
+            <a href="#mood">🏋 Movimiento</a>
+            <a href="#mood">✈ Viajes</a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="#mas-vendidas">Productos</a></div>
+        <div class="nav-item"><a href="#novedades">Novedades</a></div>
+        <div class="nav-item"><a href="#">Promociones</a></div>
+        <div class="nav-item"><a href="#">Nosotras</a></div>
+      </nav>
+    </div>
+
+    <a href="index.html" class="logo">BRAVAS</a>
+
+    <div class="header-side right">
+      <button class="icon-btn hide-mobile" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      <button class="icon-btn hide-mobile" aria-label="Favoritos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.4-9.5-8.8C.7 8.4 2.6 5 6 5c2 0 3.3 1 4 2 1.7-2 5-2.7 6.5.2C19 9 18.8 12.5 15.5 15 13 17.5 12 21 12 21Z"/></svg>
+      </button>
+      <button class="icon-btn hide-mobile" aria-label="Mi cuenta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+      </button>
+      <button class="icon-btn" data-open-cart aria-label="Ver carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge" data-cart-count style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MENÚ MOBILE — 2 niveles ============ -->
+<div class="drawer-overlay" id="menuOverlay"></div>
+<nav class="menu-drawer" id="menuDrawer" aria-label="Menú principal">
+  <div class="drawer-head">
+    <span class="logo" style="font-size:18px;">BRAVAS</span>
+    <button class="icon-btn" id="closeMenu" aria-label="Cerrar menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <ul class="menu-list">
+    <li>
+      <button class="menu-list-toggle" data-target="submenu-mood">
+        Mood
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <ul class="submenu" id="submenu-mood">
+        <li><a href="#mood">✨ Oficina</a></li>
+        <li><a href="#mood">🏙 Ciudad</a></li>
+        <li><a href="#mood">🌙 Noche</a></li>
+        <li><a href="#mood">🏋 Movimiento</a></li>
+        <li><a href="#mood">✈ Viajes</a></li>
+      </ul>
+    </li>
+    <li><a href="#mas-vendidas">Productos <span>›</span></a></li>
+    <li><a href="#novedades">Novedades <span>›</span></a></li>
+    <li><a href="#" style="color:var(--suela);">Promociones <span>›</span></a></li>
+    <li><a href="#">Nosotras <span>›</span></a></li>
+  </ul>
+  <div class="drawer-foot">
+    <span>📦 Envíos a todo el país</span>
+    <span>💬 Hablanos por WhatsApp</span>
+  </div>
+</nav>
+
+<!-- ============ HERO — imagen única, pantalla completa ============ -->
+<section class="hero">
+  <div class="hero-photo">
+    <div class="bag-illo tint-beige"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div>
+    <span class="ref-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="m21 15-5-5-9 9"/></svg>Foto real: mujer usando la cartera</span>
+  </div>
+  <div class="hero-content">
+    <span class="eyebrow">Colección camaleón</span>
+    <h1>Una cartera para <span class="chameleon">cada versión</span> de vos.</h1>
+    <p>Curamos piezas para la mujer que cambia de piel según el día: oficina, ciudad, noche. Vos elegís quién ser.</p>
+    <a href="#mas-vendidas" class="btn btn-primary">Ver colección</a>
+    <div class="hero-trust">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Envíos rápidos</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Compra segura</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Cambios fáciles</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BENEFICIOS — íconos finos ============ -->
+<section class="benefits">
+  <div class="benefits-grid">
+    <div class="benefit-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+      <strong>Envíos</strong><small>A todo el país</small>
+    </div>
+    <div class="benefit-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+      <strong>Cambios</strong><small>Primero, gratis</small>
+    </div>
+    <div class="benefit-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      <strong>Cuotas</strong><small>Hasta 6 sin interés</small>
+    </div>
+    <div class="benefit-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 3l7 3v6c0 5-3.4 8-7 9-3.6-1-7-4-7-9V6l7-3Z"/></svg>
+      <strong>Compra segura</strong><small>Datos protegidos</small>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MOODS — magazine ============ -->
+<section class="section" id="mood">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">La mujer camaleón</span>
+      <h2>Elegí tu mood</h2>
+    </div>
+    <div class="mood-scroll reveal">
+      <a class="mood-card" href="#mas-vendidas">
+        <div class="bag-illo tint-beige"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div>
+        <div class="mood-card-overlay"></div>
+        <div class="mood-card-copy"><span class="eyebrow">✨ Oficina</span><h3>Dominá la sala de reuniones</h3><p>Estructura y prolijidad, sin perder personalidad.</p></div>
+      </a>
+      <a class="mood-card" href="#mas-vendidas">
+        <div class="bag-illo tint-mist"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12 L46 46"/><path d="M80 12 L54 46"/><rect x="30" y="46" width="40" height="34" rx="6"/><path d="M30 58 h40"/></svg></div>
+        <div class="mood-card-overlay"></div>
+        <div class="mood-card-copy"><span class="eyebrow">🏙 Ciudad</span><h3>Movete sin pensarlo</h3></div>
+      </a>
+      <a class="mood-card" href="#mas-vendidas">
+        <div class="bag-illo tint-black"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div>
+        <div class="mood-card-overlay"></div>
+        <div class="mood-card-copy"><span class="eyebrow">🌙 Noche</span><h3>Salí a brillar</h3></div>
+      </a>
+      <a class="mood-card" href="#mas-vendidas">
+        <div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 55 h84"/><rect x="24" y="38" width="52" height="34" rx="15"/><circle cx="50" cy="55" r="3" fill="currentColor" stroke="none"/></svg></div>
+        <div class="mood-card-overlay"></div>
+        <div class="mood-card-copy"><span class="eyebrow">🏋 Movimiento</span><h3>Andá liviana</h3></div>
+      </a>
+      <a class="mood-card" href="#mas-vendidas">
+        <div class="bag-illo tint-beige"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M42 28 v-6 q0-4 4-4 h8 q4 0 4 4 v6"/><rect x="22" y="28" width="56" height="50" rx="6"/><path d="M50 28 v50"/><circle cx="32" cy="82" r="2.6" fill="currentColor" stroke="none"/><circle cx="68" cy="82" r="2.6" fill="currentColor" stroke="none"/></svg></div>
+        <div class="mood-card-overlay"></div>
+        <div class="mood-card-copy"><span class="eyebrow">✈ Viajes</span><h3>Llevá lo justo, bien</h3></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÁS VENDIDAS ============ -->
+<section class="section" id="mas-vendidas" style="background:var(--beige); padding-bottom:var(--sp-7);">
+  <div class="container">
+    <div class="section-head-row reveal">
+      <div><span class="eyebrow">Lo que todas eligen</span><h2>Más vendidas</h2></div>
+      <a href="#" class="section-link">Ver todas</a>
+    </div>
+
+    <div class="product-grid reveal">
+
+      <article class="product-card">
+        <a href="producto.html" class="product-media">
+          <div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div>
+          
+          <span class="product-tag suela">Más vendida</span>
+          <button class="product-wish" data-id="cartera-sofia" aria-label="Guardar en favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.4-9.5-8.8C.7 8.4 2.6 5 6 5c2 0 3.3 1 4 2 1.7-2 5-2.7 6.5.2C19 9 18.8 12.5 15.5 15 13 17.5 12 21 12 21Z"/></svg></button>
+          <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="cartera-sofia" data-name="Cartera Sofía" data-price="54900" data-variant="Suela" data-icon="cartera" data-tint="tint-suela">Agregar</button></div>
+        </a>
+        <div class="product-info">
+          <span class="product-name">Cartera Sofía — cuero eco</span>
+          <div class="product-price-row"><span class="product-price">$54.900</span></div>
+          <span class="product-installments">6 cuotas de $9.150</span>
+          <div class="product-swatches"><span class="swatch" style="background:#111"></span><span class="swatch" style="background:#B87A4B"></span><span class="swatch" style="background:#F5F1EC"></span></div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <a href="producto.html" class="product-media">
+          <div class="bag-illo tint-beige"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12 L46 46"/><path d="M80 12 L54 46"/><rect x="30" y="46" width="40" height="34" rx="6"/><path d="M30 58 h40"/></svg></div>
+          
+          <button class="product-wish" data-id="bandolera-nina" aria-label="Guardar en favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.4-9.5-8.8C.7 8.4 2.6 5 6 5c2 0 3.3 1 4 2 1.7-2 5-2.7 6.5.2C19 9 18.8 12.5 15.5 15 13 17.5 12 21 12 21Z"/></svg></button>
+          <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="bandolera-nina" data-name="Bandolera Nina" data-price="38500" data-variant="Negro" data-icon="bandolera" data-tint="tint-beige">Agregar</button></div>
+        </a>
+        <div class="product-info">
+          <span class="product-name">Bandolera Nina cross-body</span>
+          <div class="product-price-row"><span class="product-price">$38.500</span></div>
+          <span class="product-installments">6 cuotas de $6.417</span>
+          <div class="product-swatches"><span class="swatch" style="background:#111"></span><span class="swatch" style="background:#EAEAEA"></span></div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <a href="producto.html" class="product-media">
+          <div class="bag-illo tint-mist"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M36 32 Q36 16 50 16 Q64 16 64 32"/><rect x="26" y="32" width="48" height="52" rx="9"/><rect x="36" y="52" width="28" height="20" rx="4"/><path d="M31 32 v12"/><path d="M69 32 v12"/></svg></div>
+          
+          <span class="product-tag low-stock">Últimas unidades</span>
+          <button class="product-wish" data-id="mochila-uma" aria-label="Guardar en favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.4-9.5-8.8C.7 8.4 2.6 5 6 5c2 0 3.3 1 4 2 1.7-2 5-2.7 6.5.2C19 9 18.8 12.5 15.5 15 13 17.5 12 21 12 21Z"/></svg></button>
+          <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="mochila-uma" data-name="Mochila Uma" data-price="61900" data-variant="Beige" data-icon="mochila" data-tint="tint-mist">Agregar</button></div>
+        </a>
+        <div class="product-info">
+          <span class="product-name">Mochila Uma urbana</span>
+          <div class="product-price-row"><span class="product-price">$61.900</span><span class="product-price-old">$72.900</span></div>
+          <span class="product-installments">6 cuotas de $10.317</span>
+          <div class="product-swatches"><span class="swatch" style="background:#F5F1EC"></span><span class="swatch" style="background:#111"></span></div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <a href="producto.html" class="product-media">
+          <div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M34 38 Q34 18 50 18 Q66 18 66 38"/><path d="M26 38 L20 82 h60 L74 38 Z"/></svg></div>
+          
+          <button class="product-wish" data-id="bolso-clara" aria-label="Guardar en favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.4-9.5-8.8C.7 8.4 2.6 5 6 5c2 0 3.3 1 4 2 1.7-2 5-2.7 6.5.2C19 9 18.8 12.5 15.5 15 13 17.5 12 21 12 21Z"/></svg></button>
+          <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="bolso-clara" data-name="Bolso Clara" data-price="47500" data-variant="Suela" data-icon="tote" data-tint="tint-suela">Agregar</button></div>
+        </a>
+        <div class="product-info">
+          <span class="product-name">Bolso Clara tote</span>
+          <div class="product-price-row"><span class="product-price">$47.500</span></div>
+          <span class="product-installments">6 cuotas de $7.917</span>
+          <div class="product-swatches"><span class="swatch" style="background:#B87A4B"></span><span class="swatch" style="background:#111"></span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEXTO EDITORIAL ============ -->
+<section class="section" style="background:var(--beige); padding-top:0;">
+  <div class="container">
+    <p class="editorial-text reveal">Una marca no se construye con descuentos. Se construye con piezas que la gente elige llevar puestas.</p>
+  </div>
+</section>
+
+<!-- ============ BANNER EMOCIONAL ============ -->
+<section class="emotional-banner reveal">
+  <div class="emotional-content">
+    <span class="eyebrow">Bravas</span>
+    <h2>No llevás una cartera.<br>Llevás una parte de quién sos.</h2>
+  </div>
+</section>
+
+<!-- ============ NOVEDADES ============ -->
+<section class="section" id="novedades">
+  <div class="container">
+    <div class="section-head-row reveal">
+      <div><span class="eyebrow">Recién llegadas</span><h2>Novedades</h2></div>
+      <a href="#" class="section-link">Ver todas</a>
+    </div>
+    <div class="product-grid reveal">
+      <article class="product-card">
+        <a href="producto.html" class="product-media">
+          <div class="bag-illo tint-black"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div>
+          
+          <span class="product-tag">Nuevo</span>
+          <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="cartera-vera" data-name="Cartera Vera" data-price="52900" data-variant="Negro" data-icon="cartera" data-tint="tint-black">Agregar</button></div>
+        </a>
+        <div class="product-info"><span class="product-name">Cartera Vera mini</span><div class="product-price-row"><span class="product-price">$52.900</span></div><span class="product-installments">6 cuotas de $8.817</span></div>
+      </article>
+      <article class="product-card">
+        <a href="producto.html" class="product-media">
+          <div class="bag-illo tint-beige"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 55 h84"/><rect x="24" y="38" width="52" height="34" rx="15"/><circle cx="50" cy="55" r="3" fill="currentColor" stroke="none"/></svg></div>
+          
+          <span class="product-tag">Nuevo</span>
+          <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="rinonera-ivy" data-name="Riñonera Ivy" data-price="29900" data-variant="Beige" data-icon="rinonera" data-tint="tint-beige">Agregar</button></div>
+        </a>
+        <div class="product-info"><span class="product-name">Riñonera Ivy</span><div class="product-price-row"><span class="product-price">$29.900</span></div><span class="product-installments">6 cuotas de $4.983</span></div>
+      </article>
+      <article class="product-card">
+        <a href="producto.html" class="product-media">
+          <div class="bag-illo tint-beige"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12 L46 46"/><path d="M80 12 L54 46"/><rect x="30" y="46" width="40" height="34" rx="6"/><path d="M30 58 h40"/></svg></div>
+          
+          <span class="product-tag">Nuevo</span>
+          <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="bandolera-wanda" data-name="Bandolera Wanda" data-price="41900" data-variant="Suela" data-icon="bandolera" data-tint="tint-suela">Agregar</button></div>
+        </a>
+        <div class="product-info"><span class="product-name">Bandolera Wanda</span><div class="product-price-row"><span class="product-price">$41.900</span></div><span class="product-installments">6 cuotas de $6.983</span></div>
+      </article>
+      <article class="product-card">
+        <a href="producto.html" class="product-media">
+          <div class="bag-illo tint-mist"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M36 32 Q36 16 50 16 Q64 16 64 32"/><rect x="26" y="32" width="48" height="52" rx="9"/><rect x="36" y="52" width="28" height="20" rx="4"/><path d="M31 32 v12"/><path d="M69 32 v12"/></svg></div>
+          
+          <span class="product-tag">Nuevo</span>
+          <div class="product-quickadd"><button class="btn btn-primary btn-block btn-sm" data-add-to-cart data-id="mochila-rea" data-name="Mochila Rea" data-price="58900" data-variant="Negro" data-icon="mochila" data-tint="tint-beige">Agregar</button></div>
+        </a>
+        <div class="product-info"><span class="product-name">Mochila Rea plegable</span><div class="product-price-row"><span class="product-price">$58.900</span></div><span class="product-installments">6 cuotas de $9.817</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPINIONES ============ -->
+<section class="section" style="background:var(--beige);">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Clientas reales</span><h2>Lo que dicen de nosotras</h2></div>
+    <div class="reviews-scroll reveal">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Llegó antes de lo esperado y la calidad superó lo que esperaba por el precio. Ya pedí la segunda.</p>
+        <div class="review-author"><div class="review-avatar"><span style="background:var(--suela); color:#fff;">M</span></div><div><strong>Marina G.</strong><small>Compra verificada</small></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Tuve que cambiar el color y el proceso fue rapidísimo, sin costo. Volvería a comprar sin dudarlo.</p>
+        <div class="review-author"><div class="review-avatar"><span style="background:var(--black); color:var(--beige);">J</span></div><div><strong>Julieta R.</strong><small>Compra verificada</small></div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Es mi tercera cartera de BRAVAS. Se nota que eligen bien los materiales, no parecen de este precio.</p>
+        <div class="review-author"><div class="review-avatar"><span style="background:var(--beige-2); color:var(--black);">S</span></div><div><strong>Sol M.</strong><small>Compra verificada</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTAGRAM / UGC ============ -->
+<section class="section" style="padding-bottom:0;">
+  <div class="container"><div class="section-head center reveal"><span class="eyebrow">@bravas.arg</span><h2>Sumate a la comunidad</h2></div></div>
+  <div class="ugc-grid reveal">
+    <div class="ugc-item"><svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg><div class="bag-illo tint-mist"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M34 38 Q34 18 50 18 Q66 18 66 38"/><path d="M26 38 L20 82 h60 L74 38 Z"/></svg></div></div>
+    <div class="ugc-item"><svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg><div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 40 Q32 20 50 20 Q68 20 68 40"/><rect x="22" y="40" width="56" height="42" rx="5"/><path d="M22 54 h56"/><circle cx="50" cy="60" r="2.4" fill="currentColor" stroke="none"/></svg></div></div>
+    <div class="ugc-item"><svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg><div class="bag-illo tint-mist"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M36 32 Q36 16 50 16 Q64 16 64 32"/><rect x="26" y="32" width="48" height="52" rx="9"/><rect x="36" y="52" width="28" height="20" rx="4"/><path d="M31 32 v12"/><path d="M69 32 v12"/></svg></div></div>
+    <div class="ugc-item"><svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg><div class="bag-illo tint-beige"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 55 h84"/><rect x="24" y="38" width="52" height="34" rx="15"/><circle cx="50" cy="55" r="3" fill="currentColor" stroke="none"/></svg></div></div>
+    <div class="ugc-item"><svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg><div class="bag-illo tint-suela"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M34 38 Q34 18 50 18 Q66 18 66 38"/><path d="M26 38 L20 82 h60 L74 38 Z"/></svg></div></div>
+    <div class="ugc-item"><svg class="ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg><div class="bag-illo tint-black"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M42 28 v-6 q0-4 4-4 h8 q4 0 4 4 v6"/><rect x="22" y="28" width="56" height="50" rx="6"/><path d="M50 28 v50"/><circle cx="32" cy="82" r="2.6" fill="currentColor" stroke="none"/><circle cx="68" cy="82" r="2.6" fill="currentColor" stroke="none"/></svg></div></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER — minimalista ============ -->
+<footer class="site-footer">
+  <div class="footer-newsletter">
+    <div class="container">
+      <h3>Sumate al club BRAVAS</h3>
+      <p>Novedades, moods nuevos y acceso anticipado a promociones.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); showToast('¡Gracias por sumarte!');">
+        <input type="email" placeholder="tu@email.com" required>
+        <button type="submit">Sumarme</button>
+      </form>
+    </div>
+  </div>
+  <div class="container footer-mid">
+    <span class="logo">BRAVAS</span>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+      <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 3v10.5a3.5 3.5 0 1 1-3-3.46V7a6 6 0 0 0 6 4V8a3 3 0 0 1-3-3Z"/></svg></a>
+      <a href="https://wa.me/5490000000000" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg></a>
+    </div>
+  </div>
+  <div class="container footer-mid" style="padding-top:0; padding-bottom:var(--sp-6);">
+    <div class="footer-legal">
+      <a href="#">Términos y condiciones</a>
+      <a href="#">Privacidad</a>
+      <a href="#">Cambios y devoluciones</a>
+      <a href="#">Contacto</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <div class="payment-methods">
+      <span>Visa</span><span>Mastercard</span><span>Amex</span><span>Mercado Pago</span><span>Transferencia</span>
+    </div>
+    <span class="footer-copy">© 2026 BRAVAS — Hecho en Argentina 🇦🇷</span>
+  </div>
+</footer>
+
+<a class="whatsapp-fab" href="https://wa.me/5490000000000" target="_blank" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.7 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 .9-2.3c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.6.7 1.9.8 2 .1.2.1.4 0 .6-.1.2-.2.3-.3.5-.2.2-.3.3-.5.5-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.5 1.5.3.1.5.1.7-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.7.8.2.1.4.2.4.3.1.2.1.7-.1 1.2Z"/></svg>
+</a>
+
+<!-- ============ CARRITO ============ -->
+<aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+  <div class="cart-head"><h3>Tu carrito</h3><button class="icon-btn" id="closeCart" aria-label="Cerrar carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-trust-mini">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l7 3v6c0 5-3.4 8-7 9-3.6-1-7-4-7-9V6l7-3Z"/></svg> Compra segura</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/></svg> Envíos a todo el país</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 3-6.7"/></svg> Primer cambio gratis</span>
+    </div>
+    <div class="cart-subtotal-row"><span>Subtotal</span><span id="cartSubtotal">$0</span></div>
+    <a href="#" class="btn btn-primary btn-block">Finalizar compra</a>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============ BOTTOM TAB BAR — mobile ============ -->
+<nav class="tab-bar" aria-label="Navegación principal móvil">
+  <a href="index.html" class="tab-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m3 10 9-7 9 7"/><path d="M5 9v11h14V9"/></svg>Inicio
+  </a>
+  <button class="tab-item hide-desktop" data-tab-action="menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Buscar
+  </button>
+  <a href="#" class="tab-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.4-9.5-8.8C.7 8.4 2.6 5 6 5c2 0 3.3 1 4 2 1.7-2 5-2.7 6.5.2C19 9 18.8 12.5 15.5 15 13 17.5 12 21 12 21Z"/></svg>Favoritos
+  </a>
+  <button class="tab-item" data-tab-action="cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Carrito
+    <span class="cart-badge" data-cart-count style="display:none">0</span>
+  </button>
+  <a href="#" class="tab-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>Cuenta
+  </a>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>
